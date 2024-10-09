@@ -12,6 +12,7 @@ def getrequirement(file_path:str)->List[str]:
         requirement=[r.replace('\n',"") for r in requirement]
         if hypenedot in requirement:
             requirement.remove(hypenedot)
+        return requirement
 
 setup(
     name='mlproject',

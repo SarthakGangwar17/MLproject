@@ -1,18 +1,31 @@
 import sys
-def error_message(error,errorDetails:sys):
-    _,_,exc_tb=errorDetails.excinfo()
-    fileName=exc_tb.tb_frame.f_code.co_filename
-    errorMessage="Error occured in pythob script name[{0}] line number [{1}] error message [{2}]"
-    fileName,exc_tb.tb_lineno,str(error)
-    return errorMessage
+from source.Logging import logging
+def error_message_detail(error,error_detail:sys):
+    _,_,exc_tb=error_detail.exc_info()
+    line_number=exc_tb.tb_lineno
+    file_name=exc_tb.tb_frame.f_code.co_filename
+
+    error_message = f"Error occurred in Python script name [{file_name}] line number [{line_number}] error message [{str(error)}]"
+
+    
+    return error_message
 
 
 
 
 class customException(Exception):
-    def __init__(self, error,errorMessage,errorDetails:sys):
-        super().__init__(errorMessage)
-        self.errorMessage=error_message(error,errorDetails=errorDetails)
+    def __init__(self, error_message,error_detail:sys):
+        super().__init__(error_message)
+        self.error_message=error_message_detail(error_message,error_detail=error_detail)
 
-    def __str__(self) -> str:
-        return self.errorMessage
+    def __str__(self):
+        return self.error_message
+    
+
+if __name__=="__main__":
+    
+    try:
+        a=1/0
+    except Exception as e:
+        logging.info("Divide By Zero")
+        raise customException(e,sys)
