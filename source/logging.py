@@ -4,9 +4,9 @@ from datetime import datetime
 
 LogFile=f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
 
-logPath=os.path.join(os.getcwd(),"logs",LogFile)
-os.makedirs=os.path.join(logPath,exit_ok=True)
-LogFilePath=os.path.join(logPath,LogFile)
+logDir = os.path.join(os.getcwd(), "logs")
+os.makedirs=os.path.join(logDir,exit_ok=True)
+LogFilePath=os.path.join(logDir,LogFile)
 
 logging.basicConfig(
     filename=LogFilePath,
