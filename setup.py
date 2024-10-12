@@ -1,18 +1,19 @@
 from setuptools import find_packages,setup
 from typing import List
-hypenedot='-e .'
+HYPEN_E_DOT='-e .'
 def getrequirement(file_path:str)->List[str]:
     
     
-    requirement=[]
+    requirements=[]
 
-    with open(file_path) as file:
+    with open(file_path) as file_obj:
         
-        requirement=file.readlines()
-        requirement=[r.replace('\n',"") for r in requirement]
-        if hypenedot in requirement:
-            requirement.remove(hypenedot)
-        return requirement
+        requirements=file_obj.readlines()
+        requirements=[req.replace('\n',"") for req in requirements]
+        if HYPEN_E_DOT in requirements:
+            requirements.remove(HYPEN_E_DOT)
+
+    return requirements
 
 setup(
     name='mlproject',
@@ -20,7 +21,7 @@ setup(
     author='Sarthak Patel',
     author_email='sarthakgangwar1700@gmail.com',
     packages=find_packages(),
-    install_requires=getrequirement('requirement.txt')
+    install_requires=getrequirement('requirements.txt')
     
 
 
